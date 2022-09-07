@@ -12,7 +12,7 @@ const sass = gulpSass(dartSass);
 export const scss = () => {
 	return (
 		app.gulp
-			.src(app.path.src.scss, { sourcemaps: true })
+			.src(app.path.src.scss, { sourcemaps: app.isDev })
 			.pipe(
 				app.plugins.plumber(
 					app.plugins.notify.onError({
@@ -27,19 +27,25 @@ export const scss = () => {
 					outputStyle: 'expanded',
 				})
 			)
-			.pipe(groupCssMediaQueries())
+			.pipe(app.plugins.if(app.isBuild, groupCssMediaQueries()))
 			.pipe(
-				webpcss({
-					webpClass: '.webp',
-					noWebpClass: '.no-webp',
-				})
+				app.plugins.if(
+					app.isBuild,
+					webpcss({
+						webpClass: '.webp',
+						noWebpClass: '.no-webp',
+					})
+				)
 			)
 			.pipe(
-				autoprefixer({
-					grid: true,
-					overrideBrowserslist: ['last 3 versions'],
-					cascade: true,
-				})
+				app.plugins.if(
+					app.isBuild,
+					autoprefixer({
+						grid: true,
+						overrideBrowserslist: ['last 3 versions'],
+						cascade: true,
+					})
+				)
 			)
 			// Раскоментировать если нужен не сжатый дубль файла стилей
 			.pipe(app.gulp.dest(app.path.build.css))

@@ -10,6 +10,7 @@ export const path = {
 		js: `${buildFolder}/js/`,
 		css: `${buildFolder}/css/`,
 		images: `${buildFolder}/img/`,
+		fonts: `${buildFolder}/fonts/`,
 		build: `${buildFolder}/`,
 		files: `${buildFolder}/files/`,
 	},
@@ -19,6 +20,7 @@ export const path = {
 		images: `${srcFolder}/img/**/*.{jpg,jpeg,png,gif,webp}`,
 		scss: `${srcFolder}/scss/style.scss`,
 		html: `${srcFolder}/*.html`,
+		svgicons: `${srcFolder}/svgicons/*.svg`,
 		files: `${srcFolder}/files/**/*.*`,
 	},
 	watch: {
