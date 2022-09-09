@@ -1,5 +1,3 @@
-import { webpack } from 'webpack';
-
 // Проверка поддержки webp
 export function isWebP() {
 	function testWebP(callback) {
